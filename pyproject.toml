@@ -1,0 +1,134 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "docmind"
+version = "1.0.0"
+description = "An intelligent document assistant powered by agentic retrieval-augmented generation with hierarchical chunking and hybrid search."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [{ name = "DocMind Contributors" }]
+keywords = [
+    "rag",
+    "retrieval-augmented-generation",
+    "llm",
+    "document-qa",
+    "agentic",
+    "langgraph",
+    "vector-search",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = [
+    "langgraph>=1.0.0",
+    "langchain-core>=1.0.0",
+    "langchain-text-splitters>=1.0.0",
+    "langchain-ollama>=1.0.0",
+    "langchain-huggingface>=1.0.0",
+    "langchain-qdrant>=1.0.0",
+    "qdrant-client>=1.12.0",
+    "fastembed>=0.7.0",
+    "sentence-transformers>=5.0.0",
+    "pymupdf4llm>=0.2.0",
+    "gradio>=5.0.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "loguru>=0.7.0",
+    "tiktoken>=0.7.0",
+    "python-dotenv>=1.0.0",
+    "langfuse>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.8.0",
+]
+
+[project.scripts]
+docmind = "docmind.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/docmind/docmind"
+Documentation = "https://github.com/docmind/docmind/tree/main/docs"
+Repository = "https://github.com/docmind/docmind"
+Issues = "https://github.com/docmind/docmind/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/docmind"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 79
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "T20",  # flake8-print
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+    "B008",   # function call in default arg (needed for Pydantic)
+    "SIM108", # ternary operator suggestion
+    "RUF012", # mutable class attrs (needed for LangGraph state)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["docmind"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--tb=short",
+    "--cov=docmind",
+    "--cov-report=term-missing",
+    "--cov-report=html:htmlcov",
+]
+markers = [
+    "integration: marks tests requiring external services",
+    "slow: marks tests that take a long time to run",
+]
+
+[tool.coverage.run]
+source = ["docmind"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "if __name__ == .__main__.",
+    "raise NotImplementedError",
+]
+fail_under = 39
+show_missing = true
