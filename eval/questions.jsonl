@@ -1,0 +1,6 @@
+{"id": "q001", "type": "fact", "question": "What communication protocol do the ESP32 microcontrollers use to send data to the web server?", "reference": "MQTT.", "keywords": [["MQTT"]]}
+{"id": "q002", "type": "fact", "question": "How many IP cameras were integrated into the system, and what device manages their video feeds?", "reference": "Four IP cameras, managed by an 8-channel Network Video Recorder (NVR).", "keywords": [["four", "4"], ["NVR", "Network Video Recorder"]]}
+{"id": "q003", "type": "fact", "question": "Which microphone module is used in the sound threat detection module?", "reference": "The INMP441, an omnidirectional MEMS microphone with an I2S digital interface.", "keywords": [["INMP441"]]}
+{"id": "q004", "type": "fact", "question": "What is the approximate floor area of Block 10 surveyed in the project?", "reference": "About 1,707 square meters.", "keywords": [["1707", "1,707"]]}
+{"id": "q005", "type": "multi", "question": "Which channels does the system use to send emergency alerts, and which third-party service sends them?", "reference": "Email and SMS notifications, sent through Twilio.", "keywords": [["email"], ["SMS"], ["Twilio"]]}
+{"id": "q006", "type": "unanswerable", "question": "What frame rate were the IP cameras configured to record at?", "reference": "The document does not state the camera frame rate.", "keywords": []}
